@@ -41,10 +41,10 @@ vocab = Vocabulary()
 vocab.build_vocab('./lab4_dataset/train.txt')
 data_transformer = DataTransformer('./lab4_dataset/train.txt')
 
-tenser = TenseRNN(tense_size= tense_size, device= device)
-encoder = EncoderRNN(input_size= vocab_size, hidden_size= hidden_size, device= device)
-mid = midRNN(input_size= hidden_size, latent_size= latent_size, tense_size= tense_size)
-decoder = DecoderRNN(hidden_size= hidden_size, output_size=vocab_size, device= device)
+tenser = TenseRNN(tense_size= tense_size, device= device).to(device)
+encoder = EncoderRNN(input_size= vocab_size, hidden_size= hidden_size, device= device).to(device)
+mid = midRNN(input_size= hidden_size, latent_size= latent_size, tense_size= tense_size).to(device)
+decoder = DecoderRNN(hidden_size= hidden_size, output_size=vocab_size, device= device).to(device)
 
 
 def train(tenser, encoder, mid, decoder, tenser_optimizer, encoder_optimizer, mid_optimizer, decoder_optimizer ,step, input_tensor, target_tensor):
