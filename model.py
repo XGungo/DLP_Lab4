@@ -16,12 +16,13 @@ LR = 0.05
 MAX_LENGTH = 10
 latent_size = 32
 class TenseRNN(nn.Module):
-    def __init__(self, tense_size):
+    def __init__(self, tense_size, device):
         super(TenseRNN, self).__init__()
+        self.device = device
         self.tense_size = tense_size
         self.embedding = nn.Embedding(4, self.tense_size)
     def forward(self, input):
-        output = self.embedding(input).view(1, -1, self.tense_size)
+        output = self.embedding(input).view(1, -1, self.tense_size).to(self.device)
         return output
 
 class EncoderRNN(nn.Module):
