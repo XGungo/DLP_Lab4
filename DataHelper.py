@@ -75,7 +75,7 @@ class Vocabulary(object):
         """
         return [char for char in sequence]
     
-    
+
 
     def __str__(self):
         str = "Vocab information:\n"
@@ -111,9 +111,6 @@ class DataTransformer(object):
                     self.indices_sequences.append([[idx1]+word1, [idx2-idx1]+ word2])
 
     def pad_sequence(self, sequence):
-        if(len(sequence)> self.max_length):
-            print(self.max_length)
-            print(len(sequence))
         sequence += [self.PAD_ID for i in range(self.max_length - len(sequence)+1)]
         return sequence
 
