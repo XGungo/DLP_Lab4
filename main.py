@@ -174,6 +174,7 @@ if __name__ == "__main__":
     mid_optimizer = optim.SGD(mid.parameters(), lr= LR)
     decoder_optimizer = optim.SGD(decoder.parameters(), lr=LR)
     for epoch in range(10):
+        lowest_loss = 2
         loss = 0
         for step, (input_tensor, target_tensor) in enumerate(train_loader):
             input_tensor.to(device)
@@ -183,9 +184,21 @@ if __name__ == "__main__":
                             encoder_optimizer, mid_optimizer, 
                             decoder_optimizer ,step, input_tensor, target_tensor)
         loss /= step
+        if loss < lowest_loss:
+            lowest_loss = loss
+            torch.save({
+            'tenser_state_dict': tenser.state_dict(),
+            'encoder_state_dict': encoder.state_dict(),
+            'mid_state_dict': mid.state_dict(),
+            'decoder_state_dict': decoder.state_dict(),
+            'tenser_optimizer_state_dict': tenser_optimizer.state_dict(),
+            'encoder_optimizer_state_dict': encoder_optimizer.state_dict(),
+            'mid_optimizer_state_dict': mid_optimizer.state_dict(),
+            'decoder_optimizer_state_dict': decoder_optimizer.state_dict()
+            }, "./model/"+str(loss)+'.pt')
         print("the ", epoch," epochs Loss:", loss)
         pred = evaluate(tenser, encoder, mid, decoder, test_loader)
-        print(pred)
+        # print(pred)
 
         # print(pred)
 
