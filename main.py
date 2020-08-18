@@ -176,6 +176,9 @@ if __name__ == "__main__":
     for epoch in range(1000):
         loss = 0
         for step, (input_tensor, target_tensor) in enumerate(train_loader):
+            input_tensor.to(device)
+            target_tensor.to(device)
+            
             loss += train(tenser, encoder, mid, decoder, tenser_optimizer, 
                             encoder_optimizer, mid_optimizer, 
                             decoder_optimizer ,step, input_tensor, target_tensor)
