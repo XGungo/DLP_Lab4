@@ -166,8 +166,8 @@ if __name__ == "__main__":
 
     train_set = EncoDataSet(data_transformer, 'train')
     test_set = EncoDataSet(data_transformer, 'test')
-    train_loader = data.DataLoader(train_set, batch_size= batch_size, shuffle=True, num_workers=0, drop_last= True)
-    test_loader = data.DataLoader(test_set, batch_size= batch_size, num_workers=0, drop_last= True)
+    train_loader = data.DataLoader(train_set, batch_size= batch_size, shuffle=True, num_workers=4, drop_last= True)
+    test_loader = data.DataLoader(test_set, batch_size= batch_size, num_workers=4, drop_last= True)
 
     tenser_optimizer = optim.SGD(tenser.parameters(), lr= LR)
     encoder_optimizer = optim.SGD(encoder.parameters(), lr=LR)
