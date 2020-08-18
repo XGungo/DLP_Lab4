@@ -69,7 +69,7 @@ def train(tenser, encoder, mid, decoder, tenser_optimizer, encoder_optimizer, mi
         encoder_output, hidden = encoder(
         input_tensor[ei], hidden)        
     hidden = mid(hidden, target_tense)
-    decoder_input = torch.LongTensor([[SOS_token] for i in range(batch_size)], device=device).to(device)
+    decoder_input = torch.LongTensor([[SOS_token] for i in range(batch_size)]).to(device)
 
     use_teacher_forcing = True if random.random() < teacher_forcing_ratio else False
     #----------sequence to sequence part for decoder----------#
