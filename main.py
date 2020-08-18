@@ -182,7 +182,7 @@ if __name__ == "__main__":
             loss += train(tenser, encoder, mid, decoder, tenser_optimizer, 
                             encoder_optimizer, mid_optimizer, 
                             decoder_optimizer ,step, input_tensor, target_tensor)
-            loss /= step
+        loss /= step
         print("the ", epoch," epochs Loss:", loss)
         pred = evaluate(tenser, encoder, mid, decoder, test_loader)
         print(pred)
