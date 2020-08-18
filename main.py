@@ -59,8 +59,8 @@ def train(tenser, encoder, mid, decoder, tenser_optimizer, encoder_optimizer, mi
     
     input_tensor = input_tensor.transpose(0, 1)
     target_tensor = target_tensor.transpose(0, 1)
-    input_tense = tenser(input_tensor[0])
-    target_tense = tenser(target_tensor[0])
+    input_tense = tenser(input_tensor[0]).to(device)
+    target_tense = tenser(target_tensor[0]).to(device)
 
     hidden = encoder.initHidden(batch_size, tense_size)
     hidden = torch.cat((hidden, input_tense),dim=2)
@@ -178,7 +178,7 @@ if __name__ == "__main__":
         for step, (input_tensor, target_tensor) in enumerate(train_loader):
             input_tensor.to(device)
             target_tensor.to(device)
-            
+
             loss += train(tenser, encoder, mid, decoder, tenser_optimizer, 
                             encoder_optimizer, mid_optimizer, 
                             decoder_optimizer ,step, input_tensor, target_tensor)
