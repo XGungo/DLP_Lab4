@@ -107,8 +107,8 @@ def evaluate(tenser, encoder, mid, decoder,test_loader):
             
             # convert input&target into string
             for idx in range(batch_size):
-                targets.append(vocab.indices_to_sequence(target_tensor[idx].data.numpy()))
-                inputs.append(vocab.indices_to_sequence(input_tensor[idx].data.numpy()))
+                targets.append(vocab.indices_to_sequence(target_tensor[idx].cpu().data.numpy()))
+                inputs.append(vocab.indices_to_sequence(input_tensor[idx].cpu().data.numpy()))
 
             input_tensor = input_tensor.to(device)
             target_tensor = target_tensor.to(device)
@@ -173,7 +173,7 @@ if __name__ == "__main__":
     encoder_optimizer = optim.SGD(encoder.parameters(), lr=LR)
     mid_optimizer = optim.SGD(mid.parameters(), lr= LR)
     decoder_optimizer = optim.SGD(decoder.parameters(), lr=LR)
-    for epoch in range(1000):
+    for epoch in range(10):
         loss = 0
         for step, (input_tensor, target_tensor) in enumerate(train_loader):
             input_tensor.to(device)
