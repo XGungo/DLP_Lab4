@@ -148,7 +148,7 @@ def evaluate(tenser, encoder, mid, decoder,test_loader):
             output = output.view(batch_size, -1)  
         # convert indices into string
             for idx in range(batch_size):
-                prediction.append(vocab.indices_to_sequence(output[idx].data.numpy()))
+                prediction.append(vocab.indices_to_sequence(output[idx].cpu().data.numpy()))
     return prediction
 # Reconstruction + KL divergence losses summed over all elements and batch
 def loss_function(recon_x, x, mu, logvar):
@@ -182,8 +182,10 @@ if __name__ == "__main__":
             loss += train(tenser, encoder, mid, decoder, tenser_optimizer, 
                             encoder_optimizer, mid_optimizer, 
                             decoder_optimizer ,step, input_tensor, target_tensor)
+            loss /= step
         print("the ", epoch," epochs Loss:", loss)
         pred = evaluate(tenser, encoder, mid, decoder, test_loader)
+        print(pred)
 
         # print(pred)
 
