@@ -57,8 +57,8 @@ def train(tenser, encoder, mid, decoder, tenser_optimizer, encoder_optimizer, mi
 
     # transpose tensor from (batch_size, seq_len) to (seq_len, batch_size)
     
-    input_tensor = input_tensor.transpose(0, 1)
-    target_tensor = target_tensor.transpose(0, 1)
+    input_tensor = input_tensor.transpose(0, 1).to(device)
+    target_tensor = target_tensor.transpose(0, 1).to(device)
     input_tense = tenser(input_tensor[0]).to(device)
     target_tense = tenser(target_tensor[0]).to(device)
 
